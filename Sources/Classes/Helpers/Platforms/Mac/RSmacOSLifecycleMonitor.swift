@@ -206,4 +206,15 @@ extension RudderDestinationPlugin: RSmacOSLifecycle {
     }
 }
 
+
+public extension RSClient {
+    @objc func applicationDidFinishLaunching() {
+        controller.apply { (ext) in
+            if let validExt = ext as? RSmacOSLifecycle {
+                validExt.applicationDidBecomeActive()
+            }
+        }
+    }
+}
+
 #endif
