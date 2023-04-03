@@ -40,7 +40,15 @@ class RSUserDefaults {
     static func saveApplicationBuild(_ build: String?) {
         UserDefaults.standard.applicationBuild = build
     }
-    
+	
+	static func getPaused() -> Bool? {
+		return UserDefaults.standard.paused
+	}
+
+	static func savePaused(_ paused: Bool) {
+		UserDefaults.standard.paused = paused
+	}
+	
     static func getOptStatus() -> Bool? {
         return UserDefaults.standard.optStatus
     }

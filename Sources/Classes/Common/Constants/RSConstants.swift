@@ -25,6 +25,7 @@ let RSApplicationBuildKey = "rs_application_build_key"
 let RSExternalIdKey = "rs_external_id"
 let RSAnonymousIdKey = "rs_anonymous_id"
 let RSOptStatusKey = "rs_opt_status"
+let RSPausedKey = "rs_paused"
 let RSOptInTimeKey = "rs_opt_in_time"
 let RSOptOutTimeKey = "rs_opt_out_time"
 let MAX_EVENT_SIZE: UInt = 32 * 1024

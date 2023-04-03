@@ -65,7 +65,12 @@ extension UserDefaults {
         get { bool(forKey: RSOptStatusKey) }
         set { setValue(newValue, forKey: RSOptStatusKey) }
     }
-    
+	
+	var paused: Bool? {
+		get { bool(forKey: RSPausedKey) }
+		set { setValue(newValue, forKey: RSPausedKey) }
+	}
+	
     var optInTime: Int? {
         get { integer(forKey: RSOptInTimeKey) }
         set { setValue(newValue, forKey: RSOptInTimeKey) }

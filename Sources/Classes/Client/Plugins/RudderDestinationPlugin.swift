@@ -102,6 +102,10 @@ extension RudderDestinationPlugin {
             guard let self = self, let databaseManager = self.databaseManager, let config = self.client?.config else {
                 return
             }
+			guard !(RSUserDefaults.getPaused() ?? false) else {
+				self.client?.log(message: "Client paused.", logLevel: .debug)
+				return
+			}
             let uploadGroup = DispatchGroup()
             let numberOfBatch = RSUtils.getNumberOfBatch(from: databaseManager.getDBRecordCount(), and: config.flushQueueSize)
             for i in 0..<numberOfBatch {
@@ -130,6 +134,10 @@ extension RudderDestinationPlugin {
     }
     
     func periodicFlush() {
+		guard !(RSUserDefaults.getPaused() ?? false) else {
+			self.client?.log(message: "Client paused.", logLevel: .debug)
+			return
+		}
         uploadsQueue.async { [weak self] in
             guard let self = self else { return }
             self.prepareEventsToFlush()
@@ -191,4 +199,18 @@ extension RudderDestinationPlugin {
         semaphore.wait()
         return errorCode
     }
+}
+
+extension RSClient {
+	
+	/// Pauses the upload. Tracking is not interrupted.
+	@objc
+	public func setPaused(_ paused: Bool) {
+		RSUserDefaults.savePaused(paused)
+	}
+	
+	@objc
+	public func getPaused() -> Bool {
+		return RSUserDefaults.getPaused() ?? false
+	}
 }
