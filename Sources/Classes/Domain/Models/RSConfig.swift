@@ -19,7 +19,12 @@ open class RSConfig: NSObject {
     public var dataPlaneUrl: String {
         return _dataPlaneUrl
     }
-    
+	
+	private var _userAgent: String = RSUserAgent
+	public var userAgent: String {
+		return _userAgent
+	}
+	
     private var _flushQueueSize: Int = RSFlushQueueSize
     public var flushQueueSize: Int {
         return _flushQueueSize
@@ -73,7 +78,13 @@ open class RSConfig: NSObject {
         }
         return self
     }
-    
+	
+	@discardableResult @objc
+	public func userAgent(_ userAgent: String) -> RSConfig {
+		_userAgent = userAgent
+		return self
+	}
+	
     @discardableResult @objc
     public func flushQueueSize(_ flushQueueSize: Int) -> RSConfig {
         _flushQueueSize = flushQueueSize

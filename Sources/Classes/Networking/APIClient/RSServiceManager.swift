@@ -110,7 +110,8 @@ extension RSServiceManager {
 extension RSServiceManager {
     func headers(_ API: API) -> [String: String]? {
         var headers = ["Content-Type": "Application/json",
-                       "Authorization": "Basic \(client.config?.writeKey.computeAuthToken() ?? "")"]
+					   "Authorization": "Basic \(client.config?.writeKey.computeAuthToken() ?? "")",
+					   "User-Agent": client.config?.userAgent ?? ""]
         switch API {
         case .flushEvents:
             if let anonymousIdPlugin = client.find(pluginType: RSAnonymousIdPlugin.self) {
